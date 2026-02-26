@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cadenz.ai — Faster Flow. Smarter Work.</title>
+  <meta name="description" content="Cadenz.ai implémente des agents IA sur mesure pour le secteur Horeca. Réceptionniste IA, réseaux sociaux automatisés, gestion des commandes et plannings intelligents." />
+  <link rel="icon" type="image/svg+xml" href="Logo_Cadenzai_Favicon.svg" />
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --amber-dark:   #78350F;
+      --amber:        #B45309;
+      --amber-mid:    #D97706;
+      --amber-light:  #F59E0B;
+      --amber-pale:   #FCD34D;
+      --cream:        #FEF3C7;
+      --black:        #111111;
+      --dark:         #1a1a1a;
+      --dark2:        #222222;
+      --dark3:        #2a2a2a;
+      --grey:         #888888;
+      --grey-light:   #cccccc;
+      --white:        #ffffff;
+      --font:         'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--amber-light); color: var(--black); }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4 { line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── LANG TOGGLE ─── */
+    .lang-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 14px 40px;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(180,83,9,0.15);
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: var(--dark3);
+      border-radius: 30px;
+      padding: 4px;
+    }
+    .lang-btn {
+      padding: 6px 18px;
+      border-radius: 24px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--grey);
+      transition: all 0.25s;
+    }
+    .lang-btn.active {
+      background: var(--amber);
+      color: var(--white);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 48px; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: rgba(17,17,17,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-logo svg { display: block; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber-light); }
+    .nav-cta {
+      padding: 10px 24px;
+      border: 1px solid var(--amber);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber-light);
+      transition: all 0.25s;
+      cursor: pointer;
+      background: transparent;
+      font-family: var(--font);
+    }
+    .nav-cta:hover {
+      background: var(--amber);
+      color: var(--white);
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 100px 40px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-wave {
+      position: absolute;
+      opacity: 0.05;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--amber-mid);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-size: clamp(42px, 6vw, 80px);
+      font-weight: 200;
+      letter-spacing: -1px;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .hero-title strong {
+      font-weight: 700;
+      color: var(--amber-light);
+    }
+    .hero-subtitle {
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 300;
+      color: var(--grey);
+      max-width: 620px;
+      margin: 24px 0 48px;
+      line-height: 1.7;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 36px;
+      background: var(--amber);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.25s;
+    }
+    .btn-primary:hover { background: var(--amber-mid); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      padding: 16px 36px;
+      background: transparent;
+      color: var(--cream);
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover { border-color: var(--amber); color: var(--amber-light); }
+
+    /* ─── SECTION TITLES ─── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 200;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .section-title strong { font-weight: 700; }
+    .section-desc {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--grey);
+      max-width: 580px;
+      line-height: 1.8;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--amber);
+      margin: 28px 0;
+    }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--dark); }
+    .services-header { margin-bottom: 64px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 44px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .service-card:hover {
+      border-color: rgba(180,83,9,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--amber);
+      transition: height 0.3s;
+    }
+    .service-card:hover::before { height: 100%; }
+    .service-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--amber);
+      margin-bottom: 20px;
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+    }
+    .service-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .service-tagline {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--amber-mid);
+      margin-bottom: 16px;
+    }
+    .service-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.8;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+    .tag {
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(180,83,9,0.12);
+      border: 1px solid rgba(180,83,9,0.2);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--amber-mid);
+    }
+
+    /* ─── PROCESS ─── */
+    #process { background: var(--dark2); }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+    .process-step { position: relative; }
+    .process-step::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -16px;
+      width: 32px;
+      height: 1px;
+      background: rgba(180,83,9,0.3);
+    }
+    .process-step:last-child::after { display: none; }
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--amber-light);
+      margin-bottom: 20px;
+    }
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.8;
+    }
+
+    /* ─── WHY ─── */
+    #why { background: var(--dark); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+    .why-card {
+      padding: 36px 30px;
+      border-radius: 10px;
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.04);
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .why-card:hover {
+      border-color: rgba(180,83,9,0.25);
+    }
+    .why-stat {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--amber-light);
+      margin-bottom: 8px;
+    }
+    .why-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .why-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    /* ─── BOOKING ─── */
+    #booking { background: var(--dark2); }
+    .booking-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .booking-left h2 { margin-bottom: 16px; }
+    .booking-left p { font-size: 15px; color: var(--grey); margin-bottom: 12px; line-height: 1.8; }
+    .booking-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--grey-light);
+    }
+    .booking-feature::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* ─── FORM ─── */
+    .booking-form {
+      background: var(--dark);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 40px;
+    }
+    .form-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--dark2);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 14px;
+      color: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--amber); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--dark2); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--amber);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.25s;
+    }
+    .form-submit:hover { background: var(--amber-mid); }
+    .form-note {
+      font-size: 11px;
+      color: var(--grey);
+      text-align: center;
+      margin-top: 12px;
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .form-success.visible { display: block; }
+    .form-success h3 { color: var(--amber-light); margin-bottom: 12px; font-size: 20px; }
+    .form-success p { color: var(--grey); font-size: 14px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      padding: 50px 40px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--grey);
+      letter-spacing: 1px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--grey);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--amber-light); }
+
+    /* ─── SECTION CTA STRIP ─── */
+    .section-cta {
+      text-align: center;
+      padding: 56px 40px 0;
+    }
+    .section-cta .btn-primary { font-size: 14px; padding: 18px 44px; }
+    .section-cta .cta-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--grey);
+      letter-spacing: 1px;
+    }
+
+    /* ─── BOOKING CALENDLY BLOCK ─── */
+    .calendly-cta-block {
+      background: linear-gradient(135deg, rgba(180,83,9,0.12) 0%, rgba(245,158,11,0.06) 100%);
+      border: 1px solid rgba(180,83,9,0.25);
+      border-radius: 12px;
+      padding: 44px 40px;
+      text-align: center;
+    }
+    .calendly-cta-block .cal-icon {
+      width: 52px; height: 52px;
+      margin: 0 auto 20px;
+      background: rgba(180,83,9,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .calendly-cta-block h3 {
+      font-size: 20px; font-weight: 600;
+      color: var(--cream); margin-bottom: 10px;
+    }
+    .calendly-cta-block p {
+      font-size: 14px; color: var(--grey);
+      margin-bottom: 28px; line-height: 1.7;
+    }
+    .calendly-cta-block .btn-primary {
+      width: 100%; font-size: 14px; padding: 18px;
+    }
+    .calendly-or {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0;
+    }
+    .calendly-or::before, .calendly-or::after {
+      content: ''; flex: 1;
+      height: 1px; background: rgba(255,255,255,0.08);
+    }
+    .calendly-or span {
+      font-size: 11px; color: var(--grey);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 80px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-step::after { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      .booking-inner { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .lang-bar { padding: 10px 20px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" width="200" height="38">
+      <g transform="translate(0, 5)">
+        <path d="M0,22 Q10,6 20,22 Q30,38 40,22" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M6,22 Q16,10 26,22 Q36,34 44,18" fill="none" stroke="#FCD34D" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12,22 Q20,14 28,22" fill="none" stroke="#FDE68A" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="44" cy="18" r="3" fill="#F59E0B"/>
+      </g>
+      <text x="58" y="40" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" font-weight="300" letter-spacing="2" fill="#fef3c7">cadenz</text>
+      <circle cx="196" cy="35" r="2.5" fill="#F59E0B"/>
+      <text x="202" y="40" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="2" fill="#fef3c7">ai</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-fr="Services" data-en="Services">Services</a></li>
+    <li><a href="#process" data-fr="Notre approche" data-en="Our Approach">Notre approche</a></li>
+    <li><a href="#why" data-fr="Pourquoi nous" data-en="Why Us">Pourquoi nous</a></li>
+    <li><a href="#booking" data-fr="Contact" data-en="Contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="openCalendly();return false;" data-fr="Prendre RDV" data-en="Book a Call">Prendre RDV</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <svg class="hero-wave" style="top:-100px;left:-200px;width:900px;height:600px;" viewBox="0 0 900 600">
+      <path d="M0,200 Q150,50 300,200 Q450,350 600,200 Q750,50 900,200" fill="none" stroke="#F59E0B" stroke-width="3"/>
+      <path d="M50,200 Q200,80 350,200 Q500,320 650,200 Q800,80 900,160" fill="none" stroke="#FCD34D" stroke-width="2"/>
+    </svg>
+    <svg class="hero-wave" style="bottom:-150px;right:-100px;width:700px;height:500px;opacity:0.04;" viewBox="0 0 700 500">
+      <path d="M0,200 Q120,50 240,200 Q360,350 480,200 Q600,50 700,200" fill="none" stroke="#F59E0B" stroke-width="4"/>
+      <path d="M40,200 Q160,80 280,200 Q400,320 520,200" fill="none" stroke="#FDE68A" stroke-width="2.5"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-fr="Solutions IA pour l'Horeca" data-en="AI Solutions for Hospitality">Solutions IA pour l'Horeca</p>
+    <h1 class="hero-title" data-fr="Faster Flow.<br><strong>Smarter Work.</strong>" data-en="Faster Flow.<br><strong>Smarter Work.</strong>">Faster Flow.<br><strong>Smarter Work.</strong></h1>
+    <p class="hero-subtitle" data-fr="Cadenz.ai implémente des agents d'intelligence artificielle sur mesure pour les restaurants, hôtels et cafés — afin d'automatiser vos processus, libérer vos équipes et enchanter vos clients." data-en="Cadenz.ai deploys custom AI agents for restaurants, hotels, and cafés — automating your workflows, freeing your teams, and delighting your guests.">Cadenz.ai implémente des agents d'intelligence artificielle sur mesure pour les restaurants, hôtels et cafés — afin d'automatiser vos processus, libérer vos équipes et enchanter vos clients.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Prendre rendez-vous" data-en="Book a Free Call">Prendre rendez-vous</button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-fr="Voir nos services" data-en="Discover Our Services">Voir nos services</button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <p class="section-label" data-fr="Ce que nous faisons" data-en="What We Do">Ce que nous faisons</p>
+      <h2 class="section-title" data-fr="Quatre agents IA,<br><strong>une seule ambition.</strong>" data-en="Four AI agents,<br><strong>one clear ambition.</strong>">Quatre agents IA,<br><strong>une seule ambition.</strong></h2>
+      <div class="divider"></div>
+      <p class="section-desc" data-fr="Nous concevons et déployons des agents IA spécialement pensés pour les défis quotidiens du secteur Horeca — sans migration complexe, sans interruption d'activité." data-en="We design and deploy AI agents built specifically for the daily challenges of the hospitality industry — no complex migrations, no disruption to your operations.">Nous concevons et déployons des agents IA spécialement pensés pour les défis quotidiens du secteur Horeca — sans migration complexe, sans interruption d'activité.</p>
+    </div>
+    <div class="services-grid">
+
+      <!-- Service 1 -->
+      <div class="service-card">
+        <p class="service-number">01</p>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="#B45309" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <path d="M16 20 Q24 12 32 20 Q24 28 16 20Z" fill="#F59E0B" opacity="0.8"/>
+          <circle cx="24" cy="20" r="3" fill="#FCD34D"/>
+          <path d="M20 32 Q24 28 28 32" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="14" cy="34" r="2" fill="#B45309"/>
+          <circle cx="24" cy="36" r="2" fill="#B45309"/>
+          <circle cx="34" cy="34" r="2" fill="#B45309"/>
+        </svg>
+        <h3 class="service-title" data-fr="Smart Réceptionniste" data-en="Smart Receptionist">Smart Réceptionniste</h3>
+        <p class="service-tagline" data-fr="Ne ratez plus aucun appel en heure de pointe" data-en="Stop Missing Calls During Peak Hours">Ne ratez plus aucun appel en heure de pointe</p>
+        <p class="service-desc" data-fr="Notre agent IA gère vos réservations, répond aux messages et traite les demandes fréquentes 24h/24 — avec la voix et le ton de votre établissement. Intégration native avec OpenTable, Resy, Zenchef, Foodics et plus." data-en="Our AI agent handles reservations, replies to messages, and answers FAQs around the clock — speaking in your brand's voice. Native integration with OpenTable, Resy, Zenchef, Foodics and more.">Notre agent IA gère vos réservations, répond aux messages et traite les demandes fréquentes 24h/24 — avec la voix et le ton de votre établissement. Intégration native avec OpenTable, Resy, Zenchef, Foodics et plus.</p>
+        <div class="service-tags">
+          <span class="tag">Réservations</span>
+          <span class="tag">FAQ</span>
+          <span class="tag">24/7</span>
+          <span class="tag">Multicanal</span>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <p class="service-number">02</p>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="10" width="36" height="28" rx="4" stroke="#B45309" stroke-width="1.5"/>
+          <circle cx="16" cy="18" r="4" fill="#F59E0B" opacity="0.7"/>
+          <path d="M6 30 L14 22 L22 28 L30 18 L42 28" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="38" cy="12" r="5" fill="#B45309"/>
+          <path d="M36 12 L40 12 M38 10 L38 14" stroke="#FDE68A" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="service-title" data-fr="Publication Réseaux Sociaux" data-en="Social Media Automation">Publication Réseaux Sociaux</h3>
+        <p class="service-tagline" data-fr="Votre présence digitale, sans effort quotidien" data-en="Your Digital Presence, Effortlessly">Votre présence digitale, sans effort quotidien</p>
+        <p class="service-desc" data-fr="Un agent génère et publie automatiquement des contenus engageants sur Instagram, Facebook et LinkedIn — menus du jour, promotions, événements — adaptés à votre image de marque et au bon moment." data-en="An agent automatically generates and posts engaging content on Instagram, Facebook, and LinkedIn — daily specials, promotions, events — timed perfectly and tailored to your brand image.">Un agent génère et publie automatiquement des contenus engageants sur Instagram, Facebook et LinkedIn — menus du jour, promotions, événements — adaptés à votre image de marque et au bon moment.</p>
+        <div class="service-tags">
+          <span class="tag">Instagram</span>
+          <span class="tag">Facebook</span>
+          <span class="tag">LinkedIn</span>
+          <span class="tag">IA Créative</span>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <p class="service-number">03</p>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="6" width="14" height="18" rx="2" stroke="#F59E0B" stroke-width="1.5"/>
+          <rect x="26" y="6" width="14" height="18" rx="2" stroke="#FCD34D" stroke-width="1.5"/>
+          <rect x="8" y="30" width="14" height="12" rx="2" stroke="#B45309" stroke-width="1.5"/>
+          <rect x="26" y="30" width="14" height="12" rx="2" stroke="#B45309" stroke-width="1.5"/>
+          <path d="M22 15 L26 15" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M22 39 L26 39" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M17 24 L17 30" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M31 24 L31 30" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 class="service-title" data-fr="Contrôle Commande–Livraison–Facture" data-en="Order–Delivery–Invoice Control">Contrôle Commande–Livraison–Facture</h3>
+        <p class="service-tagline" data-fr="Zéro écart, zéro erreur dans votre chaîne d'approvisionnement" data-en="Zero Gaps, Zero Errors in Your Supply Chain">Zéro écart, zéro erreur dans votre chaîne d'approvisionnement</p>
+        <p class="service-desc" data-fr="Notre agent surveille et rapproche automatiquement vos bons de commande, bons de livraison et factures fournisseurs — détecte les anomalies en temps réel et déclenche les alertes nécessaires avant que ça ne devienne un problème." data-en="Our agent automatically monitors and reconciles your purchase orders, delivery notes, and supplier invoices — detecting anomalies in real time and triggering alerts before issues escalate.">Notre agent surveille et rapproche automatiquement vos bons de commande, bons de livraison et factures fournisseurs — détecte les anomalies en temps réel et déclenche les alertes nécessaires avant que ça ne devienne un problème.</p>
+        <div class="service-tags">
+          <span class="tag">Commandes</span>
+          <span class="tag">BL / Factures</span>
+          <span class="tag">Alertes</span>
+          <span class="tag">Temps réel</span>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-card">
+        <p class="service-number">04</p>
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="6" y="8" width="36" height="32" rx="3" stroke="#B45309" stroke-width="1.5"/>
+          <path d="M6 18 L42 18" stroke="#B45309" stroke-width="1"/>
+          <path d="M16 8 L16 18" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M32 8 L32 18" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="12" y="24" width="8" height="6" rx="1" fill="#F59E0B" opacity="0.6"/>
+          <rect x="28" y="24" width="8" height="6" rx="1" fill="#FCD34D" opacity="0.6"/>
+          <rect x="12" y="33" width="8" height="4" rx="1" fill="#B45309" opacity="0.5"/>
+          <rect x="28" y="33" width="8" height="4" rx="1" fill="#FDE68A" opacity="0.5"/>
+          <circle cx="38" cy="10" r="5" fill="#1a1a1a" stroke="#F59E0B" stroke-width="1.5"/>
+          <path d="M36 10 L37.5 11.5 L40 9" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 class="service-title" data-fr="Planning Collaborateur Intelligent" data-en="Intelligent Staff Scheduling">Planning Collaborateur Intelligent</h3>
+        <p class="service-tagline" data-fr="La bonne personne, au bon moment, selon vos règles" data-en="The Right Person, at the Right Time, by Your Rules">La bonne personne, au bon moment, selon vos règles</p>
+        <p class="service-desc" data-fr="Fini les plannings chronophages et les conflits de disponibilités. Notre agent génère automatiquement des plannings optimisés selon vos critères : charge prévisionnelle, compétences, contrats, préférences et contraintes légales." data-en="No more time-consuming scheduling or availability conflicts. Our agent automatically generates optimized schedules based on your criteria: forecast demand, skills, contracts, preferences, and legal constraints.">Fini les plannings chronophages et les conflits de disponibilités. Notre agent génère automatiquement des plannings optimisés selon vos critères : charge prévisionnelle, compétences, contrats, préférences et contraintes légales.</p>
+        <div class="service-tags">
+          <span class="tag">Optimisation</span>
+          <span class="tag">Contraintes légales</span>
+          <span class="tag">Prévisionnel</span>
+          <span class="tag">RH</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Discutez de vos besoins →" data-en="Discuss Your Needs →">Discutez de vos besoins →</button>
+      <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <p class="section-label" data-fr="Notre méthode" data-en="Our Method">Notre méthode</p>
+    <h2 class="section-title" data-fr="Simple, intelligent,<br><strong>évolutif.</strong>" data-en="Simple, Smart,<br><strong>Scalable.</strong>">Simple, intelligent,<br><strong>évolutif.</strong></h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <h4 class="step-title" data-fr="Smart Discovery" data-en="Smart Discovery">Smart Discovery</h4>
+        <p class="step-desc" data-fr="On commence par une conversation pour comprendre où votre établissement perd du temps. On écoute, on identifie, on priorise." data-en="We start with a conversation to understand where your venue loses time. We listen, identify, and prioritize.">On commence par une conversation pour comprendre où votre établissement perd du temps. On écoute, on identifie, on priorise.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <h4 class="step-title" data-fr="Agent sur mesure" data-en="Tailored Agent">Agent sur mesure</h4>
+        <p class="step-desc" data-fr="On conçoit un agent IA qui parle avec la voix de votre marque — chaleureux, humain, parfaitement aligné avec votre expérience client." data-en="We build an AI agent that speaks in your brand's voice — warm, human, perfectly aligned with your guest experience.">On conçoit un agent IA qui parle avec la voix de votre marque — chaleureux, humain, parfaitement aligné avec votre expérience client.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <h4 class="step-title" data-fr="Intégration transparente" data-en="Seamless Integration">Intégration transparente</h4>
+        <p class="step-desc" data-fr="On connecte l'agent à vos outils existants sans migration complexe, sans interruption. Votre service continue sans accroc." data-en="We connect the agent to your existing tools — no complex migrations, no downtime. Your service continues without a hitch.">On connecte l'agent à vos outils existants sans migration complexe, sans interruption. Votre service continue sans accroc.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <h4 class="step-title" data-fr="Optimisation continue" data-en="Continuous Optimization">Optimisation continue</h4>
+        <p class="step-desc" data-fr="On ne s'arrête pas au lancement. On monitore, on mesure, on améliore — pour des résultats qui progressent mois après mois." data-en="We don't stop at launch. We monitor, measure, and refine — delivering results that improve month after month.">On ne s'arrête pas au lancement. On monitore, on mesure, on améliore — pour des résultats qui progressent mois après mois.</p>
+      </div>
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Démarrer mon Smart Discovery →" data-en="Start My Smart Discovery →">Démarrer mon Smart Discovery →</button>
+      <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="container">
+    <p class="section-label" data-fr="Pourquoi cadenz.ai" data-en="Why cadenz.ai">Pourquoi cadenz.ai</p>
+    <h2 class="section-title" data-fr="Des résultats,<br><strong>pas des promesses.</strong>" data-en="Results,<br><strong>not promises.</strong>">Des résultats,<br><strong>pas des promesses.</strong></h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-stat">+30%</div>
+        <div class="why-label" data-fr="de réservations captées" data-en="more bookings captured">de réservations captées</div>
+        <p class="why-desc" data-fr="Plus aucun appel manqué en heure de pointe grâce au réceptionniste IA disponible 24h/24." data-en="No missed calls during peak hours with an AI receptionist available around the clock.">Plus aucun appel manqué en heure de pointe grâce au réceptionniste IA disponible 24h/24.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-stat">−80%</div>
+        <div class="why-label" data-fr="de temps sur les tâches admin" data-en="less time on admin tasks">de temps sur les tâches admin</div>
+        <p class="why-desc" data-fr="Plannings, publications, contrôle des factures — tout est automatisé, vos équipes se concentrent sur l'essentiel." data-en="Scheduling, posts, invoice control — all automated, so your teams focus on what matters.">Plannings, publications, contrôle des factures — tout est automatisé, vos équipes se concentrent sur l'essentiel.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-stat">48h</div>
+        <div class="why-label" data-fr="pour être opérationnel" data-en="to go live">pour être opérationnel</div>
+        <p class="why-desc" data-fr="Un déploiement rapide, sans perturbation de votre service. Nos agents s'intègrent à vos outils existants." data-en="Fast deployment, no service disruption. Our agents plug into your existing tools.">Un déploiement rapide, sans perturbation de votre service. Nos agents s'intègrent à vos outils existants.</p>
+      </div>
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Rejoignez nos clients →" data-en="Join Our Clients →">Rejoignez nos clients →</button>
+      <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-left">
+        <p class="section-label" data-fr="Prenons contact" data-en="Let's Talk">Prenons contact</p>
+        <h2 class="section-title" data-fr="Prêt à accélérer<br><strong>votre cadence ?</strong>" data-en="Ready to accelerate<br><strong>your rhythm?</strong>">Prêt à accélérer<br><strong>votre cadence ?</strong></h2>
+        <div class="divider"></div>
+        <p data-fr="Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre établissement — sans engagement." data-en="Book a 30-minute discovery call. We'll analyze your workflows together and identify the highest-impact automation opportunities for your venue — no commitment required.">Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre établissement — sans engagement.</p>
+        <div class="booking-feature" data-fr="Appel 100% gratuit et sans engagement" data-en="100% free, no-commitment call">Appel 100% gratuit et sans engagement</div>
+        <div class="booking-feature" data-fr="Réponse sous 24h ouvrées" data-en="Response within 24 business hours">Réponse sous 24h ouvrées</div>
+        <div class="booking-feature" data-fr="Adapté à votre secteur Horeca" data-en="Tailored to your Horeca business">Adapté à votre secteur Horeca</div>
+        <div class="booking-feature" data-fr="Déploiement possible en 48h" data-en="Live in as little as 48 hours">Déploiement possible en 48h</div>
+      </div>
+
+      <div class="booking-form">
+        <!-- Calendly primary CTA -->
+        <div class="calendly-cta-block">
+          <div class="cal-icon">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+              <circle cx="12" cy="16" r="1.5" fill="#F59E0B"/>
+            </svg>
+          </div>
+          <h3 data-fr="Réservez votre créneau" data-en="Book Your Slot">Réservez votre créneau</h3>
+          <p data-fr="Choisissez directement la date et l'heure qui vous conviennent. 30 minutes pour explorer ensemble vos opportunités d'automatisation." data-en="Pick the date and time that works for you. 30 minutes to explore your automation opportunities together.">Choisissez directement la date et l'heure qui vous conviennent. 30 minutes pour explorer ensemble vos opportunités d'automatisation.</p>
+          <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Ouvrir le calendrier →" data-en="Open the Calendar →">Ouvrir le calendrier →</button>
+        </div>
+        <!-- Separator -->
+        <div class="calendly-or"><span data-fr="Ou envoyez un message" data-en="Or send a message">Ou envoyez un message</span></div>
+        <p class="form-title" data-fr="Nous contacter" data-en="Contact Us">Nous contacter</p>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-fr="Prénom" data-en="First Name">Prénom</label>
+              <input type="text" required placeholder="Marie" />
+            </div>
+            <div class="form-group">
+              <label data-fr="Nom" data-en="Last Name">Nom</label>
+              <input type="text" required placeholder="Dupont" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-fr="Email professionnel" data-en="Business Email">Email professionnel</label>
+            <input type="email" required placeholder="marie@monrestaurant.com" />
+          </div>
+          <div class="form-group">
+            <label data-fr="Téléphone" data-en="Phone">Téléphone</label>
+            <input type="tel" placeholder="+32 499 00 00 00" />
+          </div>
+          <div class="form-group">
+            <label data-fr="Type d'établissement" data-en="Type of Venue">Type d'établissement</label>
+            <select>
+              <option value="" data-fr="Sélectionner..." data-en="Select...">Sélectionner...</option>
+              <option value="restaurant" data-fr="Restaurant" data-en="Restaurant">Restaurant</option>
+              <option value="hotel" data-fr="Hôtel" data-en="Hotel">Hôtel</option>
+              <option value="cafe" data-fr="Café / Bar" data-en="Café / Bar">Café / Bar</option>
+              <option value="catering" data-fr="Traiteur / Événementiel" data-en="Catering / Events">Traiteur / Événementiel</option>
+              <option value="other" data-fr="Autre" data-en="Other">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-fr="Quel est votre principal défi ?" data-en="What's your main challenge?">Quel est votre principal défi ?</label>
+            <textarea placeholder="Ex: On rate beaucoup d'appels le week-end, notre planning prend trop de temps..."></textarea>
+          </div>
+          <button type="submit" class="form-submit" data-fr="Envoyer mon message →" data-en="Send My Message →">Envoyer mon message →</button>
+          <p class="form-note" data-fr="Vos données sont confidentielles et ne seront jamais partagées." data-en="Your data is confidential and will never be shared.">Vos données sont confidentielles et ne seront jamais partagées.</p>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3 data-fr="Message envoyé ✓" data-en="Message sent ✓">Message envoyé ✓</h3>
+          <p data-fr="Merci ! Nous vous recontactons sous 24h ouvrées pour planifier votre appel découverte." data-en="Thank you! We'll get back to you within 24 business hours to schedule your discovery call.">Merci ! Nous vous recontactons sous 24h ouvrées pour planifier votre appel découverte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 50" width="160" height="31" style="display:block;margin-bottom:10px">
+        <g transform="translate(0,4)">
+          <path d="M0,18 Q8,5 16,18 Q24,31 32,18" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+          <path d="M5,18 Q13,8 21,18 Q29,28 35,14" fill="none" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10,18 Q16,11 22,18" fill="none" stroke="#FDE68A" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="35" cy="14" r="2.5" fill="#F59E0B"/>
+        </g>
+        <text x="46" y="32" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" font-weight="300" letter-spacing="2" fill="#fef3c7">cadenz</text>
+        <circle cx="156" cy="28" r="2" fill="#F59E0B"/>
+        <text x="162" y="32" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2" fill="#fef3c7">ai</text>
+      </svg>
+      <p class="footer-copy" data-fr="© 2025 cadenz.ai — Tous droits réservés" data-en="© 2025 cadenz.ai — All rights reserved">© 2025 cadenz.ai — Tous droits réservés</p>
+    </div>
+    <div class="footer-links">
+      <a href="#services" data-fr="Services" data-en="Services">Services</a>
+      <a href="#process" data-fr="Approche" data-en="Approach">Approche</a>
+      <a href="#booking" data-fr="Contact" data-en="Contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ─── CALENDLY ─── */
+  const CALENDLY_URL = 'https://calendly.com/his-jeremy/new-meeting';
+
+  function openCalendly() {
+    Calendly.initPopupWidget({ url: CALENDLY_URL });
+    return false;
+  }
+
+  window.addEventListener('load', function() {
+    if (typeof Calendly !== 'undefined') {
+      Calendly.initBadgeWidget({
+        url: CALENDLY_URL,
+        text: 'Prendre RDV',
+        color: '#B45309',
+        textColor: '#ffffff',
+        branding: false
+      });
+    }
+  });
+
+  /* ─── LANG SWITCH ─── */
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('[data-fr]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = text;
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = text;
+      } else {
+        el.innerHTML = text;
+      }
+    });
+    document.documentElement.lang = lang;
+  }
+
+  /* ─── FORM SUBMIT ─── */
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('visible');
+    setLang(currentLang);
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .process-step, .why-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
