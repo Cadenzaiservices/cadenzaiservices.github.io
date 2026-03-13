@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cadenz.ai — Faster Flow. Smarter Work.</title>
-  <meta name="description" content="Cadenz.ai implémente des agents IA sur mesure pour le secteur Horeca. Réceptionniste IA, réseaux sociaux automatisés, gestion des commandes et plannings intelligents." />
+  <meta name="description" content="Cadenz.ai implémente des agents IA sur mesure pour tous les secteurs. Agents vocaux, agents de chat, automatisation de workflows — libérez votre équipe et accélérez votre croissance." />
   <link rel="icon" type="image/svg+xml" href="Logo_Cadenzai_Favicon.svg" />
   <!-- Calendly -->
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
@@ -95,6 +95,11 @@
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .nav-logo svg { display: block; }
+    .nav-logo { animation: logo-float 3s ease-in-out infinite; }
+    @keyframes logo-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
     .nav-links {
       display: flex;
       gap: 36px;
@@ -149,7 +154,39 @@
     }
     .hero-wave {
       position: absolute;
-      opacity: 0.05;
+      opacity: 0.15;
+      animation: wave-flow 8s ease-in-out infinite;
+    }
+    .hero-wave:nth-child(2) {
+      animation-delay: -2s;
+    }
+    @keyframes wave-flow {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      25% { transform: translateX(10px) translateY(-5px); }
+      50% { transform: translateX(20px) translateY(-10px); }
+      75% { transform: translateX(10px) translateY(-5px); }
+    }
+
+    /* ─── SVG PATH ANIMATIONS ─── */
+    .hero-wave path {
+      animation: path-wave 6s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .hero-wave:nth-child(1) path:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .hero-wave:nth-child(1) path:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .hero-wave:nth-child(2) path:nth-child(1) {
+      animation-delay: 0.4s;
+    }
+    .hero-wave:nth-child(2) path:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+    @keyframes path-wave {
+      0%, 100% { stroke-width: 2; opacity: 0.05; }
+      50% { stroke-width: 2.5; opacity: 0.08; }
     }
     .hero-content {
       position: relative;
@@ -258,7 +295,7 @@
     .services-header { margin-bottom: 64px; }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
     .service-card {
@@ -332,6 +369,66 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--amber-mid);
+    }
+
+    /* ─── USE CASES ─── */
+    #usecases { background: var(--dark2); }
+    .usecase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 56px; }
+    .usecase-card {
+      background: var(--dark);
+      border: 1px solid rgba(180,83,9,0.2);
+      border-radius: 12px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .usecase-card:hover {
+      border-color: rgba(180,83,9,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(180,83,9,0.1);
+    }
+    .usecase-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(180,83,9,0.2);
+      border: 1px solid rgba(180,83,9,0.4);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--amber-light);
+      margin-bottom: 16px;
+    }
+    .usecase-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .usecase-desc {
+      font-size: 14px;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .usecase-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .usecase-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--grey-light);
+    }
+    .usecase-feature::before {
+      content: '▸';
+      color: var(--amber-light);
+      flex-shrink: 0;
+      font-weight: 700;
     }
 
     /* ─── PROCESS ─── */
@@ -414,6 +511,52 @@
     .why-desc {
       font-size: 13px;
       font-weight: 300;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    /* ─── LEAD MANAGEMENT ─── */
+    #leadmgmt { background: var(--dark); }
+    .leadmgmt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 56px; }
+    .leadmgmt-card {
+      background: var(--dark2);
+      border: 1px solid rgba(245,158,11,0.15);
+      border-radius: 12px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .leadmgmt-card:hover {
+      border-color: rgba(245,158,11,0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(245,158,11,0.08);
+    }
+    .leadmgmt-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(245,158,11,0.1);
+      border-radius: 8px;
+    }
+    .leadmgmt-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .leadmgmt-subtitle {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--amber-mid);
+      margin-bottom: 12px;
+    }
+    .leadmgmt-desc {
+      font-size: 14px;
       color: var(--grey);
       line-height: 1.7;
     }
@@ -554,6 +697,7 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--amber-light); }
+    footer svg { animation: logo-float 3s ease-in-out infinite; }
 
     /* ─── SECTION CTA STRIP ─── */
     .section-cta {
@@ -607,12 +751,21 @@
       letter-spacing: 2px; text-transform: uppercase;
     }
 
+    /* ─── TABLET ─── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+      .leadmgmt-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ─── MOBILE ─── */
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       section { padding: 80px 20px; }
       .services-grid { grid-template-columns: 1fr; }
+      .usecase-grid { grid-template-columns: 1fr; }
+      .leadmgmt-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; }
       .process-step::after { display: none; }
       .why-grid { grid-template-columns: 1fr; }
@@ -650,7 +803,8 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services" data-fr="Services" data-en="Services">Services</a></li>
-    <li><a href="#process" data-fr="Notre approche" data-en="Our Approach">Notre approche</a></li>
+    <li><a href="#usecases" data-fr="Cas d'usage" data-en="Use Cases">Cas d'usage</a></li>
+    <li><a href="#leadmgmt" data-fr="Leads" data-en="Leads">Leads</a></li>
     <li><a href="#why" data-fr="Pourquoi nous" data-en="Why Us">Pourquoi nous</a></li>
     <li><a href="#booking" data-fr="Contact" data-en="Contact">Contact</a></li>
   </ul>
@@ -661,18 +815,18 @@
 <section id="hero">
   <div class="hero-bg">
     <svg class="hero-wave" style="top:-100px;left:-200px;width:900px;height:600px;" viewBox="0 0 900 600">
-      <path d="M0,200 Q150,50 300,200 Q450,350 600,200 Q750,50 900,200" fill="none" stroke="#F59E0B" stroke-width="3"/>
-      <path d="M50,200 Q200,80 350,200 Q500,320 650,200 Q800,80 900,160" fill="none" stroke="#FCD34D" stroke-width="2"/>
+      <path d="M0,200 Q150,50 300,200 Q450,350 600,200 Q750,50 900,200" fill="none" stroke="#F59E0B" stroke-width="5"/>
+      <path d="M50,200 Q200,80 350,200 Q500,320 650,200 Q800,80 900,160" fill="none" stroke="#FCD34D" stroke-width="3.5"/>
     </svg>
     <svg class="hero-wave" style="bottom:-150px;right:-100px;width:700px;height:500px;opacity:0.04;" viewBox="0 0 700 500">
-      <path d="M0,200 Q120,50 240,200 Q360,350 480,200 Q600,50 700,200" fill="none" stroke="#F59E0B" stroke-width="4"/>
-      <path d="M40,200 Q160,80 280,200 Q400,320 520,200" fill="none" stroke="#FDE68A" stroke-width="2.5"/>
+      <path d="M0,200 Q120,50 240,200 Q360,350 480,200 Q600,50 700,200" fill="none" stroke="#F59E0B" stroke-width="6"/>
+      <path d="M40,200 Q160,80 280,200 Q400,320 520,200" fill="none" stroke="#FDE68A" stroke-width="4"/>
     </svg>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow" data-fr="Solutions IA pour l'Horeca" data-en="AI Solutions for Hospitality">Solutions IA pour l'Horeca</p>
+    <p class="hero-eyebrow" data-fr="Solutions IA pour tous les secteurs" data-en="AI Solutions for Every Industry">Solutions IA pour tous les secteurs</p>
     <h1 class="hero-title" data-fr="Faster Flow.<br><strong>Smarter Work.</strong>" data-en="Faster Flow.<br><strong>Smarter Work.</strong>">Faster Flow.<br><strong>Smarter Work.</strong></h1>
-    <p class="hero-subtitle" data-fr="Cadenz.ai implémente des agents d'intelligence artificielle sur mesure pour les restaurants, hôtels et cafés — afin d'automatiser vos processus, libérer vos équipes et enchanter vos clients." data-en="Cadenz.ai deploys custom AI agents for restaurants, hotels, and cafés — automating your workflows, freeing your teams, and delighting your guests.">Cadenz.ai implémente des agents d'intelligence artificielle sur mesure pour les restaurants, hôtels et cafés — afin d'automatiser vos processus, libérer vos équipes et enchanter vos clients.</p>
+    <p class="hero-subtitle" data-fr="Cadenz.ai implémente des agents d'intelligence artificielle sur mesure — agents vocaux, chat, automatisation — pour transformer vos processus, libérer vos équipes et accélérer votre croissance, peu importe votre secteur." data-en="Cadenz.ai deploys custom AI agents — voice agents, chat agents, workflow automation — to transform your processes, free your teams, and accelerate your growth across any industry.">Cadenz.ai implémente des agents d'intelligence artificielle sur mesure — agents vocaux, chat, automatisation — pour transformer vos processus, libérer vos équipes et accélérer votre croissance, peu importe votre secteur.</p>
     <div class="hero-ctas">
       <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Prendre rendez-vous" data-en="Book a Free Call">Prendre rendez-vous</button>
       <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-fr="Voir nos services" data-en="Discover Our Services">Voir nos services</button>
@@ -684,10 +838,10 @@
 <section id="services">
   <div class="container">
     <div class="services-header">
-      <p class="section-label" data-fr="Ce que nous faisons" data-en="What We Do">Ce que nous faisons</p>
-      <h2 class="section-title" data-fr="Quatre agents IA,<br><strong>une seule ambition.</strong>" data-en="Four AI agents,<br><strong>one clear ambition.</strong>">Quatre agents IA,<br><strong>une seule ambition.</strong></h2>
+      <p class="section-label" data-fr="Nos solutions" data-en="Our Solutions">Nos solutions</p>
+      <h2 class="section-title" data-fr="Trois piliers,<br><strong>une vision complète.</strong>" data-en="Three Pillars,<br><strong>one complete vision.</strong>">Trois piliers,<br><strong>une vision complète.</strong></h2>
       <div class="divider"></div>
-      <p class="section-desc" data-fr="Nous concevons et déployons des agents IA spécialement pensés pour les défis quotidiens du secteur Horeca — sans migration complexe, sans interruption d'activité." data-en="We design and deploy AI agents built specifically for the daily challenges of the hospitality industry — no complex migrations, no disruption to your operations.">Nous concevons et déployons des agents IA spécialement pensés pour les défis quotidiens du secteur Horeca — sans migration complexe, sans interruption d'activité.</p>
+      <p class="section-desc" data-fr="Nous concevons et déployons des agents IA sur mesure pour automatiser vos opérations, enrichir votre relation client et transformer vos processus — peu importe votre secteur d'activité." data-en="We design and deploy custom AI agents to automate your operations, enhance customer relationships, and transform your processes — across any industry.">Nous concevons et déployons des agents IA sur mesure pour automatiser vos opérations, enrichir votre relation client et transformer vos processus — peu importe votre secteur d'activité.</p>
     </div>
     <div class="services-grid">
 
@@ -695,22 +849,20 @@
       <div class="service-card">
         <p class="service-number">01</p>
         <svg class="service-icon" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="22" stroke="#B45309" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <path d="M16 20 Q24 12 32 20 Q24 28 16 20Z" fill="#F59E0B" opacity="0.8"/>
-          <circle cx="24" cy="20" r="3" fill="#FCD34D"/>
-          <path d="M20 32 Q24 28 28 32" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="14" cy="34" r="2" fill="#B45309"/>
-          <circle cx="24" cy="36" r="2" fill="#B45309"/>
-          <circle cx="34" cy="34" r="2" fill="#B45309"/>
+          <path d="M12 20 L12 32 Q12 36 16 36 L32 36 Q36 36 36 32 L36 20" stroke="#B45309" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 20 L18 16 Q18 12 22 12 L26 12 Q30 12 30 16 L30 20" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="28" r="2.5" fill="#FCD34D"/>
+          <path d="M6 20 L6 24 Q6 28 10 28" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M42 20 L42 24 Q42 28 38 28" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <h3 class="service-title" data-fr="Smart Réceptionniste" data-en="Smart Receptionist">Smart Réceptionniste</h3>
-        <p class="service-tagline" data-fr="Ne ratez plus aucun appel en heure de pointe" data-en="Stop Missing Calls During Peak Hours">Ne ratez plus aucun appel en heure de pointe</p>
-        <p class="service-desc" data-fr="Notre agent IA gère vos réservations, répond aux messages et traite les demandes fréquentes 24h/24 — avec la voix et le ton de votre établissement. Intégration native avec OpenTable, Resy, Zenchef, Foodics et plus." data-en="Our AI agent handles reservations, replies to messages, and answers FAQs around the clock — speaking in your brand's voice. Native integration with OpenTable, Resy, Zenchef, Foodics and more.">Notre agent IA gère vos réservations, répond aux messages et traite les demandes fréquentes 24h/24 — avec la voix et le ton de votre établissement. Intégration native avec OpenTable, Resy, Zenchef, Foodics et plus.</p>
+        <h3 class="service-title" data-fr="AI Voice Agents" data-en="AI Voice Agents">AI Voice Agents</h3>
+        <p class="service-tagline" data-fr="Des appels et conversations naturels, 24h/24" data-en="Natural Voice Conversations, Around the Clock">Des appels et conversations naturels, 24h/24</p>
+        <p class="service-desc" data-fr="Agents vocaux dotés de l'IA générative pour répondre aux appels, qualifier les prospects, capturer les besoins et planifier les rendez-vous. Voix naturelle, multilingue, avec contexte complet de votre établissement. Réductions 30%+ sur les appels manqués." data-en="Generative AI-powered voice agents for answering calls, qualifying leads, capturing needs, and scheduling appointments. Natural voice, multilingual, with full context of your business. Reduce missed calls by 30%+.">Agents vocaux dotés de l'IA générative pour répondre aux appels, qualifier les prospects, capturer les besoins et planifier les rendez-vous. Voix naturelle, multilingue, avec contexte complet de votre établissement. Réductions 30%+ sur les appels manqués.</p>
         <div class="service-tags">
           <span class="tag">Réservations</span>
-          <span class="tag">FAQ</span>
+          <span class="tag">Appels entrants</span>
           <span class="tag">24/7</span>
-          <span class="tag">Multicanal</span>
+          <span class="tag">Multilingue</span>
         </div>
       </div>
 
@@ -718,20 +870,23 @@
       <div class="service-card">
         <p class="service-number">02</p>
         <svg class="service-icon" viewBox="0 0 48 48" fill="none">
-          <rect x="6" y="10" width="36" height="28" rx="4" stroke="#B45309" stroke-width="1.5"/>
-          <circle cx="16" cy="18" r="4" fill="#F59E0B" opacity="0.7"/>
-          <path d="M6 30 L14 22 L22 28 L30 18 L42 28" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="38" cy="12" r="5" fill="#B45309"/>
-          <path d="M36 12 L40 12 M38 10 L38 14" stroke="#FDE68A" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="6" y="8" width="36" height="32" rx="3" stroke="#B45309" stroke-width="1.5"/>
+          <path d="M6 16 L42 16" stroke="#B45309" stroke-width="1"/>
+          <circle cx="13" cy="12" r="1.5" fill="#F59E0B"/>
+          <circle cx="24" cy="12" r="1.5" fill="#F59E0B"/>
+          <circle cx="35" cy="12" r="1.5" fill="#F59E0B"/>
+          <path d="M10 22 L38 22" stroke="#FCD34D" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M10 28 L38 28" stroke="#FCD34D" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M10 34 L30 34" stroke="#FCD34D" stroke-width="1.2" stroke-linecap="round"/>
         </svg>
-        <h3 class="service-title" data-fr="Publication Réseaux Sociaux" data-en="Social Media Automation">Publication Réseaux Sociaux</h3>
-        <p class="service-tagline" data-fr="Votre présence digitale, sans effort quotidien" data-en="Your Digital Presence, Effortlessly">Votre présence digitale, sans effort quotidien</p>
-        <p class="service-desc" data-fr="Un agent génère et publie automatiquement des contenus engageants sur Instagram, Facebook et LinkedIn — menus du jour, promotions, événements — adaptés à votre image de marque et au bon moment." data-en="An agent automatically generates and posts engaging content on Instagram, Facebook, and LinkedIn — daily specials, promotions, events — timed perfectly and tailored to your brand image.">Un agent génère et publie automatiquement des contenus engageants sur Instagram, Facebook et LinkedIn — menus du jour, promotions, événements — adaptés à votre image de marque et au bon moment.</p>
+        <h3 class="service-title" data-fr="AI Chat Agents" data-en="AI Chat Agents">AI Chat Agents</h3>
+        <p class="service-tagline" data-fr="Support et engagement 24/7 sur tous vos canaux" data-en="24/7 Support & Engagement Across All Channels">Support et engagement 24/7 sur tous vos canaux</p>
+        <p class="service-desc" data-fr="Agents de chat intelligents pour WhatsApp, Messenger, Slack, email et webchat — répondent instantanément aux questions, classifient les demandes, enrichissent les conversations avec contexte et données. Réduction de 70% des tickets manuels et satisfaction client accrue." data-en="Smart chat agents for WhatsApp, Messenger, Slack, email, and webchat — instant replies, automatic classification, contextual insights. Cut manual ticket handling by 70% and boost customer satisfaction.">Agents de chat intelligents pour WhatsApp, Messenger, Slack, email et webchat — répondent instantanément aux questions, classifient les demandes, enrichissent les conversations avec contexte et données. Réduction de 70% des tickets manuels et satisfaction client accrue.</p>
         <div class="service-tags">
-          <span class="tag">Instagram</span>
-          <span class="tag">Facebook</span>
-          <span class="tag">LinkedIn</span>
-          <span class="tag">IA Créative</span>
+          <span class="tag">WhatsApp</span>
+          <span class="tag">Email</span>
+          <span class="tag">Support 24/7</span>
+          <span class="tag">Multichannel</span>
         </div>
       </div>
 
@@ -739,55 +894,83 @@
       <div class="service-card">
         <p class="service-number">03</p>
         <svg class="service-icon" viewBox="0 0 48 48" fill="none">
-          <rect x="8" y="6" width="14" height="18" rx="2" stroke="#F59E0B" stroke-width="1.5"/>
-          <rect x="26" y="6" width="14" height="18" rx="2" stroke="#FCD34D" stroke-width="1.5"/>
-          <rect x="8" y="30" width="14" height="12" rx="2" stroke="#B45309" stroke-width="1.5"/>
-          <rect x="26" y="30" width="14" height="12" rx="2" stroke="#B45309" stroke-width="1.5"/>
-          <path d="M22 15 L26 15" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M22 39 L26 39" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M17 24 L17 30" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M31 24 L31 30" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="6" y="10" width="14" height="28" rx="2" stroke="#B45309" stroke-width="1.5"/>
+          <rect x="28" y="10" width="14" height="28" rx="2" stroke="#F59E0B" stroke-width="1.5"/>
+          <path d="M20 14 L28 14" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 24 L28 24" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M20 34 L28 34" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="13" cy="20" r="2" fill="#F59E0B" opacity="0.6"/>
+          <circle cx="35" cy="20" r="2" fill="#B45309" opacity="0.6"/>
         </svg>
-        <h3 class="service-title" data-fr="Contrôle Commande–Livraison–Facture" data-en="Order–Delivery–Invoice Control">Contrôle Commande–Livraison–Facture</h3>
-        <p class="service-tagline" data-fr="Zéro écart, zéro erreur dans votre chaîne d'approvisionnement" data-en="Zero Gaps, Zero Errors in Your Supply Chain">Zéro écart, zéro erreur dans votre chaîne d'approvisionnement</p>
-        <p class="service-desc" data-fr="Notre agent surveille et rapproche automatiquement vos bons de commande, bons de livraison et factures fournisseurs — détecte les anomalies en temps réel et déclenche les alertes nécessaires avant que ça ne devienne un problème." data-en="Our agent automatically monitors and reconciles your purchase orders, delivery notes, and supplier invoices — detecting anomalies in real time and triggering alerts before issues escalate.">Notre agent surveille et rapproche automatiquement vos bons de commande, bons de livraison et factures fournisseurs — détecte les anomalies en temps réel et déclenche les alertes nécessaires avant que ça ne devienne un problème.</p>
+        <h3 class="service-title" data-fr="Workflow Automation" data-en="Workflow Automation">Workflow Automation</h3>
+        <p class="service-tagline" data-fr="Automatisez vos processus, du début à la fin" data-en="Automate Your End-to-End Processes">Automatisez vos processus, du début à la fin</p>
+        <p class="service-desc" data-fr="Orchestration intelligente de vos workflows — commandes, facturation, planification, publication, intégrations — avec contrôle qualité automatique, alertes intelligentes et rapports en temps réel. Connexion native avec Salesforce, HubSpot, Jira, et 500+ applications." data-en="Intelligent workflow orchestration — orders, invoicing, scheduling, publishing, integrations — with automatic quality checks, smart alerts, and real-time reports. Native integrations with Salesforce, HubSpot, Jira, and 500+ apps.">Orchestration intelligente de vos workflows — commandes, facturation, planification, publication, intégrations — avec contrôle qualité automatique, alertes intelligentes et rapports en temps réel. Connexion native avec Salesforce, HubSpot, Jira, et 500+ applications.</p>
         <div class="service-tags">
-          <span class="tag">Commandes</span>
-          <span class="tag">BL / Factures</span>
-          <span class="tag">Alertes</span>
+          <span class="tag">Orchestration</span>
+          <span class="tag">Automatisation</span>
+          <span class="tag">Intégrations</span>
           <span class="tag">Temps réel</span>
-        </div>
-      </div>
-
-      <!-- Service 4 -->
-      <div class="service-card">
-        <p class="service-number">04</p>
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none">
-          <rect x="6" y="8" width="36" height="32" rx="3" stroke="#B45309" stroke-width="1.5"/>
-          <path d="M6 18 L42 18" stroke="#B45309" stroke-width="1"/>
-          <path d="M16 8 L16 18" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M32 8 L32 18" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="12" y="24" width="8" height="6" rx="1" fill="#F59E0B" opacity="0.6"/>
-          <rect x="28" y="24" width="8" height="6" rx="1" fill="#FCD34D" opacity="0.6"/>
-          <rect x="12" y="33" width="8" height="4" rx="1" fill="#B45309" opacity="0.5"/>
-          <rect x="28" y="33" width="8" height="4" rx="1" fill="#FDE68A" opacity="0.5"/>
-          <circle cx="38" cy="10" r="5" fill="#1a1a1a" stroke="#F59E0B" stroke-width="1.5"/>
-          <path d="M36 10 L37.5 11.5 L40 9" stroke="#F59E0B" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3 class="service-title" data-fr="Planning Collaborateur Intelligent" data-en="Intelligent Staff Scheduling">Planning Collaborateur Intelligent</h3>
-        <p class="service-tagline" data-fr="La bonne personne, au bon moment, selon vos règles" data-en="The Right Person, at the Right Time, by Your Rules">La bonne personne, au bon moment, selon vos règles</p>
-        <p class="service-desc" data-fr="Fini les plannings chronophages et les conflits de disponibilités. Notre agent génère automatiquement des plannings optimisés selon vos critères : charge prévisionnelle, compétences, contrats, préférences et contraintes légales." data-en="No more time-consuming scheduling or availability conflicts. Our agent automatically generates optimized schedules based on your criteria: forecast demand, skills, contracts, preferences, and legal constraints.">Fini les plannings chronophages et les conflits de disponibilités. Notre agent génère automatiquement des plannings optimisés selon vos critères : charge prévisionnelle, compétences, contrats, préférences et contraintes légales.</p>
-        <div class="service-tags">
-          <span class="tag">Optimisation</span>
-          <span class="tag">Contraintes légales</span>
-          <span class="tag">Prévisionnel</span>
-          <span class="tag">RH</span>
         </div>
       </div>
 
     </div>
     <div class="section-cta">
       <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Discutez de vos besoins →" data-en="Discuss Your Needs →">Discutez de vos besoins →</button>
+      <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="container">
+    <p class="section-label" data-fr="Cas d'usage" data-en="Use Cases">Cas d'usage</p>
+    <h2 class="section-title" data-fr="Transformer des secteurs,<br><strong>créer de la valeur.</strong>" data-en="Transform Industries,<br><strong>Create Value.</strong>">Transformer des secteurs,<br><strong>créer de la valeur.</strong></h2>
+    <div class="divider"></div>
+    <div class="usecase-grid">
+
+      <!-- Use Case 1 -->
+      <div class="usecase-card">
+        <span class="usecase-badge" data-fr="HORECA" data-en="HOSPITALITY">HORECA</span>
+        <h3 class="usecase-title" data-fr="Réceptionniste Intelligent" data-en="Smart Receptionist">Réceptionniste Intelligent</h3>
+        <p class="usecase-desc" data-fr="Capturez chaque appel entrant et transformez-le en réservation confirmée. Votre agent répond 24/7 en la voix de votre établissement." data-en="Capture every inbound call and turn it into a confirmed booking. Your agent answers 24/7 in your venue's voice.">Capturez chaque appel entrant et transformez-le en réservation confirmée. Votre agent répond 24/7 en la voix de votre établissement.</p>
+        <div class="usecase-features">
+          <div class="usecase-feature" data-fr="Réservations en temps réel" data-en="Real-time bookings">Réservations en temps réel</div>
+          <div class="usecase-feature" data-fr="Intégration OpenTable, Resy, Zenchef" data-en="OpenTable, Resy, Zenchef integration">Intégration OpenTable, Resy, Zenchef</div>
+          <div class="usecase-feature" data-fr="Prise de notes contextuelles" data-en="Contextual note-taking">Prise de notes contextuelles</div>
+          <div class="usecase-feature" data-fr="+30% appels captés" data-en="+30% calls captured">+30% appels captés</div>
+        </div>
+      </div>
+
+      <!-- Use Case 2 -->
+      <div class="usecase-card">
+        <span class="usecase-badge" data-fr="HORECA + RETAIL" data-en="HOSPITALITY + RETAIL">HORECA + RETAIL</span>
+        <h3 class="usecase-title" data-fr="Création de Contenu Local" data-en="Local Content Creation">Création de Contenu Local</h3>
+        <p class="usecase-desc" data-fr="Publiez du contenu engageant sur Instagram, Facebook, LinkedIn — avec des photos de vos plats, promotions du jour, événements spéciaux. 100% local, 100% authentique." data-en="Publish engaging content on Instagram, Facebook, LinkedIn — featuring your dishes, daily specials, special events. 100% local, 100% authentic.">Publiez du contenu engageant sur Instagram, Facebook, LinkedIn — avec des photos de vos plats, promotions du jour, événements spéciaux. 100% local, 100% authentique.</p>
+        <div class="usecase-features">
+          <div class="usecase-feature" data-fr="Génération et publication automatiques" data-en="Automated generation & posting">Génération et publication automatiques</div>
+          <div class="usecase-feature" data-fr="Détection d'images locales" data-en="Local image detection">Détection d'images locales</div>
+          <div class="usecase-feature" data-fr="Timing optimisé par IA" data-en="AI-optimized timing">Timing optimisé par IA</div>
+          <div class="usecase-feature" data-fr="+50% engagement" data-en="+50% engagement">+50% engagement</div>
+        </div>
+      </div>
+
+      <!-- Use Case 3 -->
+      <div class="usecase-card">
+        <span class="usecase-badge" data-fr="HORECA + RH" data-en="HOSPITALITY + HR">HORECA + RH</span>
+        <h3 class="usecase-title" data-fr="Planning Optimisé" data-en="Optimized Scheduling">Planning Optimisé</h3>
+        <p class="usecase-desc" data-fr="Générez des plannings intelligents selon la charge prévisionnelle, les compétences, les contrats et les préférences d'équipe. Gain de 15 heures/mois en gestion." data-en="Generate smart schedules based on forecast demand, skills, contracts, and team preferences. Save 15 hrs/month on scheduling.">Générez des plannings intelligents selon la charge prévisionnelle, les compétences, les contrats et les préférences d'équipe. Gain de 15 heures/mois en gestion.</p>
+        <div class="usecase-features">
+          <div class="usecase-feature" data-fr="Optimisation automatique" data-en="Automatic optimization">Optimisation automatique</div>
+          <div class="usecase-feature" data-fr="Contraintes légales incluses" data-en="Legal constraints included">Contraintes légales incluses</div>
+          <div class="usecase-feature" data-fr="Validation équipe en 1 clic" data-en="Team approval in 1 click">Validation équipe en 1 clic</div>
+          <div class="usecase-feature" data-fr="−15h/mois en gestion" data-en="−15h/mo in management">−15h/mois en gestion</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Découvrez votre cas d'usage →" data-en="Discover Your Use Case →">Découvrez votre cas d'usage →</button>
       <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
     </div>
   </div>
@@ -834,23 +1017,79 @@
     <h2 class="section-title" data-fr="Des résultats,<br><strong>pas des promesses.</strong>" data-en="Results,<br><strong>not promises.</strong>">Des résultats,<br><strong>pas des promesses.</strong></h2>
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-stat">+30%</div>
-        <div class="why-label" data-fr="de réservations captées" data-en="more bookings captured">de réservations captées</div>
-        <p class="why-desc" data-fr="Plus aucun appel manqué en heure de pointe grâce au réceptionniste IA disponible 24h/24." data-en="No missed calls during peak hours with an AI receptionist available around the clock.">Plus aucun appel manqué en heure de pointe grâce au réceptionniste IA disponible 24h/24.</p>
+        <div class="why-stat">+40%</div>
+        <div class="why-label" data-fr="de productivité" data-en="productivity boost">de productivité</div>
+        <p class="why-desc" data-fr="Automatisation intelligente des tâches répétitives, vos équipes se concentrent sur la croissance et l'innovation." data-en="Intelligent automation of repetitive tasks, freeing your teams to focus on growth and innovation.">Automatisation intelligente des tâches répétitives, vos équipes se concentrent sur la croissance et l'innovation.</p>
       </div>
       <div class="why-card">
-        <div class="why-stat">−80%</div>
-        <div class="why-label" data-fr="de temps sur les tâches admin" data-en="less time on admin tasks">de temps sur les tâches admin</div>
-        <p class="why-desc" data-fr="Plannings, publications, contrôle des factures — tout est automatisé, vos équipes se concentrent sur l'essentiel." data-en="Scheduling, posts, invoice control — all automated, so your teams focus on what matters.">Plannings, publications, contrôle des factures — tout est automatisé, vos équipes se concentrent sur l'essentiel.</p>
+        <div class="why-stat">−65%</div>
+        <div class="why-label" data-fr="de coûts opérationnels" data-en="operational costs cut">de coûts opérationnels</div>
+        <p class="why-desc" data-fr="Réduction drastique des heures manuelles, des erreurs et des processus inefficaces. ROI visible en 90 jours." data-en="Slash manual hours, errors, and inefficient processes. Visible ROI in 90 days.">Réduction drastique des heures manuelles, des erreurs et des processus inefficaces. ROI visible en 90 jours.</p>
       </div>
       <div class="why-card">
-        <div class="why-stat">48h</div>
+        <div class="why-stat">7j</div>
         <div class="why-label" data-fr="pour être opérationnel" data-en="to go live">pour être opérationnel</div>
-        <p class="why-desc" data-fr="Un déploiement rapide, sans perturbation de votre service. Nos agents s'intègrent à vos outils existants." data-en="Fast deployment, no service disruption. Our agents plug into your existing tools.">Un déploiement rapide, sans perturbation de votre service. Nos agents s'intègrent à vos outils existants.</p>
+        <p class="why-desc" data-fr="Déploiement rapide et sans interruption. Nos agents s'intègrent nativement à vos systèmes existants (Salesforce, HubSpot, etc.)." data-en="Fast, seamless deployment. Our agents integrate natively with your existing systems (Salesforce, HubSpot, etc.).">Déploiement rapide et sans interruption. Nos agents s'intègrent nativement à vos systèmes existants (Salesforce, HubSpot, etc.).</p>
       </div>
     </div>
     <div class="section-cta">
       <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Rejoignez nos clients →" data-en="Join Our Clients →">Rejoignez nos clients →</button>
+      <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MANAGEMENT -->
+<section id="leadmgmt">
+  <div class="container">
+    <p class="section-label" data-fr="Gestion des leads" data-en="Lead Management">Gestion des leads</p>
+    <h2 class="section-title" data-fr="Transformer vos leads<br><strong>en clients.</strong>" data-en="Transform Leads<br><strong>into Clients.</strong>">Transformer vos leads<br><strong>en clients.</strong></h2>
+    <div class="divider"></div>
+    <p class="section-desc" data-fr="Pour les agences immobilières, les cabinets de conseil et tous les métiers du B2B : captez, qualifiez et convertissez vos leads automatiquement." data-en="For real estate agencies, consulting firms, and all B2B businesses: capture, qualify, and convert your leads automatically.">Pour les agences immobilières, les cabinets de conseil et tous les métiers du B2B : captez, qualifiez et convertissez vos leads automatiquement.</p>
+    <div class="leadmgmt-grid" style="margin-top: 56px;">
+
+      <!-- Lead Management 1 -->
+      <div class="leadmgmt-card">
+        <div class="leadmgmt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+            <path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke="#F59E0B"/>
+            <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" stroke="#F59E0B"/>
+          </svg>
+        </div>
+        <h3 class="leadmgmt-title" data-fr="Leads Entrants" data-en="Inbound Leads">Leads Entrants</h3>
+        <p class="leadmgmt-subtitle" data-fr="Immobilier, Conseil, Services" data-en="Real Estate, Consulting, Services">Immobilier, Conseil, Services</p>
+        <p class="leadmgmt-desc" data-fr="Répondez instantanément aux demandes de renseignements, pré-qualifiez les prospects et planifiez les visites automatiquement. Aucun lead ne se perd dans la chaîne." data-en="Instantly respond to inquiries, pre-qualify prospects, and automatically schedule viewings. No lead falls through the cracks.">Répondez instantanément aux demandes de renseignements, pré-qualifiez les prospects et planifiez les visites automatiquement. Aucun lead ne se perd dans la chaîne.</p>
+      </div>
+
+      <!-- Lead Management 2 -->
+      <div class="leadmgmt-card">
+        <div class="leadmgmt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+            <path d="M18 21H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2Z" stroke="#F59E0B"/>
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" stroke="#F59E0B"/>
+            <path d="M9 12h6M9 16h4" stroke="#F59E0B"/>
+          </svg>
+        </div>
+        <h3 class="leadmgmt-title" data-fr="Recherche de Vendeurs" data-en="Seller Outreach">Recherche de Vendeurs</h3>
+        <p class="leadmgmt-subtitle" data-fr="Immobilier" data-en="Real Estate">Immobilier</p>
+        <p class="leadmgmt-desc" data-fr="Campagnes de prospection automatisées : SMS, email, appels pour identifier les propriétaires intéressés. Qualification AI et suivi intelligent. Augmentez votre sourcing de 3x." data-en="Automated outreach campaigns: SMS, email, calls to identify interested sellers. AI-powered qualification and smart follow-up. Increase sourcing by 3x.">Campagnes de prospection automatisées : SMS, email, appels pour identifier les propriétaires intéressés. Qualification AI et suivi intelligent. Augmentez votre sourcing de 3x.</p>
+      </div>
+
+      <!-- Lead Management 3 -->
+      <div class="leadmgmt-card">
+        <div class="leadmgmt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="24" height="24">
+            <path d="M9 19c-5 1.5-5-2.5-7-4m14 6v-3.87a3.375 3.375 0 0 0-3.375-3.375h-1.5a3.375 3.375 0 0 0-3.375 3.375v3.87m6-13a3.375 3.375 0 1 0-6.75 0 3.375 3.375 0 0 0 6.75 0Z" stroke="#F59E0B"/>
+          </svg>
+        </div>
+        <h3 class="leadmgmt-title" data-fr="Automatisation Marketing" data-en="Marketing Automation">Automatisation Marketing</h3>
+        <p class="leadmgmt-subtitle" data-fr="B2B, E-commerce, Services" data-en="B2B, E-commerce, Services">B2B, E-commerce, Services</p>
+        <p class="leadmgmt-desc" data-fr="Segments intelligents, nurturing automatisé, déclenchement de campagnes par comportement. Convertissez 3x plus de leads avec 70% moins d'effort manual." data-en="Smart segmentation, automated nurturing, behavior-triggered campaigns. Convert 3x more leads with 70% less manual effort.">Segments intelligents, nurturing automatisé, déclenchement de campagnes par comportement. Convertissez 3x plus de leads avec 70% moins d'effort manual.</p>
+      </div>
+
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary" onclick="openCalendly();return false;" data-fr="Voir votre potentiel de leads →" data-en="See Your Lead Potential →">Voir votre potentiel de leads →</button>
       <p class="cta-note" data-fr="Appel gratuit · 30 min · Sans engagement" data-en="Free call · 30 min · No commitment">Appel gratuit · 30 min · Sans engagement</p>
     </div>
   </div>
@@ -864,11 +1103,11 @@
         <p class="section-label" data-fr="Prenons contact" data-en="Let's Talk">Prenons contact</p>
         <h2 class="section-title" data-fr="Prêt à accélérer<br><strong>votre cadence ?</strong>" data-en="Ready to accelerate<br><strong>your rhythm?</strong>">Prêt à accélérer<br><strong>votre cadence ?</strong></h2>
         <div class="divider"></div>
-        <p data-fr="Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre établissement — sans engagement." data-en="Book a 30-minute discovery call. We'll analyze your workflows together and identify the highest-impact automation opportunities for your venue — no commitment required.">Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre établissement — sans engagement.</p>
+        <p data-fr="Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre organisation — sans engagement." data-en="Book a 30-minute discovery call. We'll analyze your workflows together and identify the highest-impact automation opportunities for your business — no commitment required.">Réservez un appel découverte de 30 minutes. On analyse ensemble vos processus et on identifie les opportunités d'automatisation les plus impactantes pour votre organisation — sans engagement.</p>
         <div class="booking-feature" data-fr="Appel 100% gratuit et sans engagement" data-en="100% free, no-commitment call">Appel 100% gratuit et sans engagement</div>
         <div class="booking-feature" data-fr="Réponse sous 24h ouvrées" data-en="Response within 24 business hours">Réponse sous 24h ouvrées</div>
-        <div class="booking-feature" data-fr="Adapté à votre secteur Horeca" data-en="Tailored to your Horeca business">Adapté à votre secteur Horeca</div>
-        <div class="booking-feature" data-fr="Déploiement possible en 48h" data-en="Live in as little as 48 hours">Déploiement possible en 48h</div>
+        <div class="booking-feature" data-fr="Adapté à votre secteur" data-en="Tailored to your industry">Adapté à votre secteur</div>
+        <div class="booking-feature" data-fr="Déploiement possible en 7 jours" data-en="Live in as little as 7 days">Déploiement possible en 7 jours</div>
       </div>
 
       <div class="booking-form">
@@ -908,19 +1147,21 @@
             <input type="tel" placeholder="+32 499 00 00 00" />
           </div>
           <div class="form-group">
-            <label data-fr="Type d'établissement" data-en="Type of Venue">Type d'établissement</label>
+            <label data-fr="Votre secteur" data-en="Your Industry">Votre secteur</label>
             <select>
               <option value="" data-fr="Sélectionner..." data-en="Select...">Sélectionner...</option>
-              <option value="restaurant" data-fr="Restaurant" data-en="Restaurant">Restaurant</option>
-              <option value="hotel" data-fr="Hôtel" data-en="Hotel">Hôtel</option>
-              <option value="cafe" data-fr="Café / Bar" data-en="Café / Bar">Café / Bar</option>
-              <option value="catering" data-fr="Traiteur / Événementiel" data-en="Catering / Events">Traiteur / Événementiel</option>
+              <option value="hospitality" data-fr="Horeca / Restauration" data-en="Hospitality / Restaurant">Horeca / Restauration</option>
+              <option value="ecommerce" data-fr="E-commerce" data-en="E-commerce">E-commerce</option>
+              <option value="saas" data-fr="SaaS / Logiciels" data-en="SaaS / Software">SaaS / Logiciels</option>
+              <option value="professional" data-fr="Services Professionnels" data-en="Professional Services">Services Professionnels</option>
+              <option value="healthcare" data-fr="Santé / Médical" data-en="Healthcare">Santé / Médical</option>
+              <option value="retail" data-fr="Retail / Commerce" data-en="Retail / Commerce">Retail / Commerce</option>
               <option value="other" data-fr="Autre" data-en="Other">Autre</option>
             </select>
           </div>
           <div class="form-group">
             <label data-fr="Quel est votre principal défi ?" data-en="What's your main challenge?">Quel est votre principal défi ?</label>
-            <textarea placeholder="Ex: On rate beaucoup d'appels le week-end, notre planning prend trop de temps..."></textarea>
+            <textarea placeholder="Ex: Nous manquons de ressources pour traiter les appels entrants, notre support client débordé..."></textarea>
           </div>
           <button type="submit" class="form-submit" data-fr="Envoyer mon message →" data-en="Send My Message →">Envoyer mon message →</button>
           <p class="form-note" data-fr="Vos données sont confidentielles et ne seront jamais partagées." data-en="Your data is confidential and will never be shared.">Vos données sont confidentielles et ne seront jamais partagées.</p>
@@ -953,7 +1194,8 @@
     </div>
     <div class="footer-links">
       <a href="#services" data-fr="Services" data-en="Services">Services</a>
-      <a href="#process" data-fr="Approche" data-en="Approach">Approche</a>
+      <a href="#usecases" data-fr="Cas d'usage" data-en="Use Cases">Cas d'usage</a>
+      <a href="#leadmgmt" data-fr="Leads" data-en="Leads">Leads</a>
       <a href="#booking" data-fr="Contact" data-en="Contact">Contact</a>
     </div>
   </div>
@@ -1019,7 +1261,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.service-card, .process-step, .why-card').forEach(el => {
+  document.querySelectorAll('.service-card, .usecase-card, .leadmgmt-card, .process-step, .why-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
